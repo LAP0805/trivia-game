@@ -1,0 +1,40 @@
+body{
+    background:url("../images/background3.jpg");
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+#title{
+    font-size:80px;
+    color:rgb(228, 57, 85);
+    text-align:center;
+    font-family: 'Monoton', cursive;
+    
+}
+#gameArea{
+    background: pink;
+    height:100vh;
+    font-family: 'Righteous', cursive;
+    text-align:center;
+    font-size:25px;
+}
+#startButton{
+    width:150px;
+    height:100px;
+    font-size: 40px;
+}
+#option1,#option2,#option3,#option4{
+    cursor: pointer;
+};
+
+#option1:hover{
+    background-color:yellow;
+}
+button {
+    
+    line-height: 60px;
+    font-weight: bold;
+    padding: 0 40px;
+    background: salmon;
+    border-radius:10px;
+    border:none;
+}
