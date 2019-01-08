@@ -24,9 +24,10 @@ body{
 }
 #option1,#option2,#option3,#option4{
     cursor: pointer;
-};
+    border-radius:10px;
+}
 
-#option1:hover{
+#option1:hover, #option2:hover, #option3:hover, #option4:hover{
     background-color:yellow;
 }
 button {

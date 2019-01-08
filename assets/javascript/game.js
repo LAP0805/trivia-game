@@ -27,7 +27,7 @@ var questions = {
     question5: {
         text:"Come as You Are, a song by the grunge band Nirvana was released on which album?",
         correctAnswer:"Nevermind",
-        incorrectAnswers:["Nevermore", "Smells Like Teen Spirit","Holy Water"],
+        incorrectAnswers:["Nevermore", "Smells Like Teen Spirit","In Utero"],
         gif:"https://thumbs.gfycat.com/SharpEqualGnat-size_restricted.gif",
     },
     question6: {
