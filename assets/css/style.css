@@ -10,6 +10,16 @@ body{
     font-family: 'Monoton', cursive;
     
 }
+#timer {
+    background: pink;
+    font-family: 'Righteous', cursive;
+    text-align:center;
+    font-size:25px;
+    margin:10px;
+    border-radius:15px;
+    visibility:hidden;
+    
+}
 #gameArea{
     background: pink;
     height:100vh;

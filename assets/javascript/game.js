@@ -125,20 +125,59 @@ var questionArray=[questions.question1,questions.question2, questions.question3,
 
 wins=0;
 losses=0;
+var timeleft = 15;
 
 
+//on start do game//
 $("#startButton").on("click",function(){
-   Game()
-})
+    $("#timer").css({visibility:"visible"});
+   Game();
+   
+});
 
+//timer//
+function clock(){
+ myTimer = setInterval(function(){
+ document.getElementById("counter").textContent = timeleft;
+timeleft--;
+if(timeleft === 0){
+losses ++;
+$("#timer").css({visibility:"hidden"});
+    $("#gameArea").text("Out of time! The correct answer is " + randomQuestion.correctAnswer);
+    $("#gameArea").append("<br>" + "<img src=" + randomQuestion.gif +">")
+    setTimeout(function(){
+       isGameOver();
+    }, 3000);
+    clearInterval(myTimer);
+    timeleft=15;
+    document.getElementById("counter").textContent = "";
+}
+},1000);
+};
+
+//stop timer//
+function stopClock(){
+    clearInterval(myTimer);
+    timeleft=15;
+    document.getElementById("counter").textContent = "";
+    $("#timer").css({visibility:"hidden"});
+   
+}
+
+
+
+//game function//
 function Game(){
+    clock();
     randomQuestion = questionArray[Math.floor(Math.random()*questionArray.length)];
    var randomQuestionText=randomQuestion.text;
 $("#gameArea").text(randomQuestionText);
 $("#gameArea").append("<br><br>");
 createOptions();
 deleteQuestion();
-}
+$("#timer").css({visibility:"visible"});
+
+};
 
 
 //delete asked question//
@@ -150,7 +189,7 @@ function deleteQuestion(){
             
         });
 }
-
+//create possible answers in random order//
 function createOptions(){
     var contents = [randomQuestion.correctAnswer, randomQuestion.incorrectAnswers[0], randomQuestion.incorrectAnswers[1],randomQuestion.incorrectAnswers[2]];
    contents= contents.sort(function(a, b){return 0.5 - Math.random()});
@@ -194,6 +233,7 @@ function clicky(){
             setTimeout(function(){
             isGameOver();
             }, 3000);
+            stopClock();
         }
         else {
             losses ++;
@@ -202,10 +242,12 @@ function clicky(){
             setTimeout(function(){
                isGameOver();
             }, 3000);
+            stopClock();
+            
         }
     });    
 }
-
+//is the game over?//
 function isGameOver(){
 if (questionArray.length === 0){
     $("#gameArea").text("Well Done!");
@@ -223,7 +265,7 @@ else{
     
 }
 }
-
+//on hit pay Again button//
 function playAgain(){
     $("#playAgain").on("click", function(){
         questionArray=[questions.question1,questions.question2, questions.question3, questions.question4, questions.question5, questions.question6, questions.question7,questions.question8, questions.question9,questions.question10,questions.question11, questions.question12,questions.question13,questions.question14,questions.question15,questions.question16,questions.question17,questions.question18,questions.question19,questions.question20];
