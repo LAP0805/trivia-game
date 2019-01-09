@@ -136,29 +136,45 @@ $("#startButton").on("click",function(){
 });
 
 //timer//
-function clock(){
- myTimer = setInterval(function(){
- document.getElementById("counter").textContent = timeleft;
-timeleft--;
-if(timeleft === 0){
-losses ++;
-$("#timer").css({visibility:"hidden"});
+var startTime, countAmt, interval;
+
+function now() {
+  return ((new Date()).getTime());
+}
+
+function tick() {
+  var elapsed = now() - startTime;
+  var cnt = countAmt - elapsed;
+  var elem = document.getElementById("counter");
+  if (cnt > 0) {
+    elem.innerHTML = Math.round(cnt / 1000);
+  } else {
+    elem.innerHTML = "0";
+    clearInterval(interval);
+    losses ++;
+    $("#timer").css({visibility:"hidden"});
     $("#gameArea").text("Out of time! The correct answer is " + randomQuestion.correctAnswer);
     $("#gameArea").append("<br>" + "<img src=" + randomQuestion.gif +">")
     setTimeout(function(){
        isGameOver();
     }, 3000);
-    clearInterval(myTimer);
-    timeleft=15;
-    document.getElementById("counter").textContent = "";
+  }
 }
-},1000);
-};
+
+function startTimer(secs) {
+  clearInterval(interval);
+  document.getElementById("counter").innerHTML = secs;
+  countAmt = secs * 1000;
+  startTime = now();
+  interval = setInterval(tick, 1000);
+  
+}
+
+
 
 //stop timer//
 function stopClock(){
-    clearInterval(myTimer);
-    timeleft=15;
+    clearInterval(interval);
     document.getElementById("counter").textContent = "";
     $("#timer").css({visibility:"hidden"});
    
@@ -168,7 +184,7 @@ function stopClock(){
 
 //game function//
 function Game(){
-    clock();
+    startTimer(15);
     randomQuestion = questionArray[Math.floor(Math.random()*questionArray.length)];
    var randomQuestionText=randomQuestion.text;
 $("#gameArea").text(randomQuestionText);
